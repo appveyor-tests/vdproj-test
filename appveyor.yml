@@ -8,6 +8,7 @@ build_script:
     if (test-path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE") { $env:DevenvPath = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE" }
 
     # Enable VDPROJ support
+    dir $env:DevenvPath\CommonExtensions\Microsoft\VSI
     if(Test-Path HKCU:\SOFTWARE\Microsoft\VisualStudio\14.0_Config\MSBuild) {
         Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\VisualStudio\14.0_Config\MSBuild -Name EnableOutOfProcBuild -Value 0
     }
