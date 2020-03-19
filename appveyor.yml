@@ -8,7 +8,10 @@ build_script:
     if (test-path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE") { $env:DevenvPath = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE" }
 
     # Enable VDPROJ support
-    & "$env:DevenvPath\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild\DisableOutOfProcBuild.exe"
+    Push-Location "$env:DevenvPath\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild"
+    & DisableOutOfProcBuild.exe
+    Pop-Location
+    dir
     
 - '"%DevenvPath%\devenv.com" SetupProjectTestApp.sln /build Debug /project Setup1\Setup1.vdproj /projectconfig Debug /Out errorFile.txt'
 
