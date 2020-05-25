@@ -10,7 +10,7 @@ init:
 - ps: Add-SessionPath "$env:ProgramFiles\AutoHotKey"
 - git clone --branch=vs2019 https://github.com/appveyor-tests/vdproj-test.git %temp%\vdproj-test
 - ps: Start-Process -FilePath "$env:DevenvPath\devenv.exe" -ArgumentList "$env:temp\vdproj-test\SetupProjectTestApp.sln","/Command","File.Exit"
-- autohotkey vs2019-initial.ahk
+- autohotkey %temp%\vdproj-test\vs2019-initial.ahk
 - ps: while (Get-Process devenv -ErrorAction SilentlyContinue) { Start-Sleep -s 5; }
 
 build_script:
