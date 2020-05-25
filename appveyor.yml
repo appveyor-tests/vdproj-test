@@ -17,21 +17,3 @@ build_script:
 - '"%DevenvPath%\devenv.com" SetupProjectTestApp.sln /build Debug /project Setup1\Setup1.vdproj /projectconfig Debug /Out errorFile.txt'
 
 test: off
-
-
-
-init:
-- appveyor version
-
-install:
-
-
-build_script:
-- ps: |
-    $env:DevenvPath = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE'
-    if (test-path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE") { $env:DevenvPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE" }
-    if (test-path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE") { $env:DevenvPath = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE" }
-
-- '"%DevenvPath%\devenv.com" SetupProjectTestApp.sln /build Debug /project Setup1\Setup1.vdproj /projectconfig Debug /Out errorFile.txt'
-
-test: off
