@@ -1,6 +1,6 @@
 init:
 - appveyor version
-- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 - ps: |
     $env:DevenvPath = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE'
     if (test-path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE") { $env:DevenvPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE" }
@@ -9,10 +9,13 @@ init:
 - ps: Add-Path "$env:ProgramFiles\AutoHotKey"
 - ps: Add-SessionPath "$env:ProgramFiles\AutoHotKey"
 - git clone --branch=vs2019 https://github.com/appveyor-tests/vdproj-test.git %temp%\vdproj-test
-- ps: Start-Process -FilePath "$env:DevenvPath\devenv.exe" -ArgumentList "$env:temp\vdproj-test\SetupProjectTestApp.sln" #,"/Command","File.Exit"
-- autohotkey %temp%\vdproj-test\vs2019-initial.ahk
-- ps: while (Get-Process devenv -ErrorAction SilentlyContinue) { Start-Sleep -s 5; }
-- ps: Start-Sleep -s 5
+#- ps: Start-Process -FilePath "$env:DevenvPath\devenv.exe" -ArgumentList "$env:temp\vdproj-test\SetupProjectTestApp.sln" #,"/Command","File.Exit"
+#- autohotkey %temp%\vdproj-test\vs2019-initial.ahk
+#- ps: while (Get-Process devenv -ErrorAction SilentlyContinue) { Start-Sleep -s 5; }
+#- ps: Start-Sleep -s 5
+
+install:
+- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 build_script:
 - '"%DevenvPath%\devenv.com" SetupProjectTestApp.sln /build Debug /project Setup1\Setup1.vdproj /projectconfig Debug /Out errorFile.txt'
